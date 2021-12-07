@@ -1,0 +1,19 @@
+@startuml
+object Comunication {
+  * Target-Action
+  * Second item
+}
+class UIViewController {}
+class UIView {}
+class MyViewController {}
+class MyView {}
+class MyModel
+UIViewController <|-- MyViewController
+UIView <|-- MyView
+
+MyViewController -> MyView
+MyView .> MyViewController
+MyModel <- MyViewController
+MyModel .> MyViewController
+
+@enduml
