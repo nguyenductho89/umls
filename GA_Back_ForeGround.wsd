@@ -1,0 +1,15 @@
+@startuml
+class BaseViewController
+class SubBaseViewControler
+class NotSubBaseViewController
+interface GATrackingProtocol {
+    func trackCurrentSreen
+    func defineGA
+}
+BaseViewController <|-- SubBaseViewControler
+GATrackingProtocol <|.. BaseViewController
+GATrackingProtocol <|.. NotSubBaseViewController
+BaseViewController -|> UIViewController
+UIViewController <|- NotSubBaseViewController
+
+@enduml

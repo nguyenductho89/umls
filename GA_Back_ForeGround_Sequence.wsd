@@ -1,0 +1,32 @@
+@startuml
+' class BaseViewController
+' class SubBaseViewControler
+' class NotSubBaseViewController
+' interface GATrackingProtocol {
+'     func trackCurrentSreen
+'     func defineGA
+' }
+' BaseViewController <|-- SubBaseViewControler
+' GATrackingProtocol <|.. BaseViewController
+' GATrackingProtocol <|.. NotSubBaseViewController
+' BaseViewController -|> UIViewController
+' UIViewController <|- NotSubBaseViewController
+title Flow gửi event background -> foreground
+
+legend
+  # Sự kiện background -> foreground gồm các thông tin :
+  ## screen Id, screen Name của màn hình trước khi app vào background
+  ## Khoảng thời gian tính bằng giây app chạy trong background
+end legend
+BaseViewController -> BaseViewController:viewDidLoad
+group ref
+BaseViewController -> BaseViewController: trackCurrentSreen
+end group
+BaseViewController -> TrackManager: save currentID, screen Name
+AppDelegate -> AppDelegate: vào background
+AppDelegate -> TrackManager: lưu lại thời điểm app vào background
+AppDelegate -> AppDelegate: app lên foreground foreground
+AppDelegate -> TrackManager: tạo sự kiện background -> foreground
+TrackManager -> GoogleAnalytic: gửi sự kiện background -> foreground
+
+@enduml

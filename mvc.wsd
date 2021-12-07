@@ -1,12 +1,35 @@
 @startuml
+
+package ModelTask {
+  object NetworkCall
+  object Database
+  object Parsing
+  object BusinessLogic
+}
+
+package ViewTask {
+  object Render
+}
+
+package ControllerTask {
+  object UserEventHandling
+  object Routing
+  object FormatingUI
+}
+
 object Comunication {
   * Target-Action
-  * Second item
+  * Delegate
+  * Closure
+  * Notification
 }
+
+
 class UIViewController {}
 class UIView {}
 class MyViewController {}
 class MyView {}
+
 class MyModel
 UIViewController <|-- MyViewController
 UIView <|-- MyView
@@ -15,5 +38,8 @@ MyViewController -> MyView
 MyView .> MyViewController
 MyModel <- MyViewController
 MyModel .> MyViewController
+MyModel ... ModelTask
+MyViewController ... ControllerTask
+MyView ... ViewTask
 
 @enduml
